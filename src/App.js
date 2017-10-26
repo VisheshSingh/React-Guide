@@ -11,7 +11,8 @@ class App extends Component {
       {name: 'Janny', age: 23},
       {name: 'Janardhan', age: 25}
     ],
-    username: 'Harvey Spectre'
+    username: 'Harvey Spectre',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -40,6 +41,11 @@ class App extends Component {
       username: e.target.value
     })
   }
+
+  toggleHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow})
+  }
   
   render() {
     const style = {
@@ -55,29 +61,33 @@ class App extends Component {
         <h1>Hi, I am a React App</h1>
         <button 
           style={style}
-          onClick={this.switchNameHandler.bind(this, 'Jitendra')}
+          onClick={this.toggleHandler}
         >Switch Name
         </button>
-        <Person 
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler}
-        />
-        <Person
-          name={this.state.persons[1].name}  
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Jigglypuff')}
-        >My Hobbies: Racing
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          change={this.nameChangeHandler}
-        />
+        { this.state.showPersons ?
+          <div>
+          <Person 
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            click={this.switchNameHandler}
+          />
+          <Person
+            name={this.state.persons[1].name}  
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Jigglypuff')}
+          >My Hobbies: Racing
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+            change={this.nameChangeHandler}
+          />
+        </div> : null
+        }
 
-        <UserInput changeUI={this.changeUserOutputHandler.bind(this)} currentName={this.state.username}/>
+        {/* <UserInput changeUI={this.changeUserOutputHandler.bind(this)} currentName={this.state.username}/>
         <UserOutput username="Anthony Gonsalvis"/>
-        <UserOutput username={this.state.username}/>
+        <UserOutput username={this.state.username}/> */}
       </div>
     );
   }
