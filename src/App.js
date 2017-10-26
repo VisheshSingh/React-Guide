@@ -7,9 +7,9 @@ import UserOutput from './UserOutput/UserOutput';
 class App extends Component {
   state = {
     persons: [
-      {name: 'John', age: 20},
-      {name: 'Janny', age: 23},
-      {name: 'Janardhan', age: 25}
+      { id: 'qwe1', name: 'John', age: 20 },
+      { id: 'asdasd3', name: 'Janny', age: 23 },
+      { id: 'ACDF2', name: 'Janardhan', age: 25 }
     ],
     username: 'Harvey Spectre',
     showPersons: false
@@ -70,7 +70,11 @@ class App extends Component {
         <div>
           {
             this.state.persons.map((person, index) => {
-              return <Person name={person.name} age={person.age} click={this.deleteUserHandler.bind(this, index)} />
+              return <Person 
+                name={person.name} 
+                age={person.age} 
+                click={this.deleteUserHandler.bind(this, index)}
+                key={person.id} />
             })
           }
 
