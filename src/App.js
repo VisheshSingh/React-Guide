@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
   state = {
@@ -15,18 +13,7 @@ class App extends Component {
     showPersons: false
   }
 
-  // switchNameHandler = (newName) => {
-  //   //console.log('Was clicked!');
-  //   this.setState({
-  //     persons : [
-  //       {name: 'Jitu', age: 20},
-  //       {name: newName, age: 23},
-  //       {name: 'Janardhan', age: 25}
-  //     ]
-  //   })
-  // }
-
-  nameChangeHandler = (e, id) => {
+  nameChangeHandler = (id, e) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
@@ -52,12 +39,6 @@ class App extends Component {
     this.setState({persons: persons})
   }
 
-  changeUserOutputHandler = (e) => {
-    this.setState({
-      username: e.target.value
-    })
-  }
-
   toggleHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow})
@@ -65,9 +46,10 @@ class App extends Component {
   
   render() {
     const style = {
-      backgroundColor: '#fff',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
-      border: '1px solid green',
+      border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
     }
@@ -84,28 +66,12 @@ class App extends Component {
                 age={person.age} 
                 click={this.deleteUserHandler.bind(this, index)}
                 key={person.id}
-                change={(e) => this.nameChangeHandler(e, person.id)} />
+                change={this.nameChangeHandler.bind(this, person.id)} />
             })
           }
-
-          {/* <Person 
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-            click={this.switchNameHandler}
-          />
-          <Person
-            name={this.state.persons[1].name}  
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'Jigglypuff')}
-          >My Hobbies: Racing
-          </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-            change={this.nameChangeHandler}
-          /> */}
         </div>
       );
+      style.backgroundColor = 'red';
     }
 
     return (
@@ -117,10 +83,6 @@ class App extends Component {
         >Toggle Persons
         </button>
         {persons}
-
-        {/* <UserInput changeUI={this.changeUserOutputHandler.bind(this)} currentName={this.state.username}/>
-        <UserOutput username="Anthony Gonsalvis"/>
-        <UserOutput username={this.state.username}/> */}
       </div>
     );
   }
